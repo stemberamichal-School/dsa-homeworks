@@ -44,6 +44,8 @@ class Homework1 implements Mergesort {
                 sIdx++;
             }
         }
+
+        return result;
     }
 
     @Override
