@@ -50,6 +50,10 @@ class Homework1 implements Mergesort {
 
     @Override
     public int[] mergesort(int[] array) {
+        if(array.length == 1) {
+            return array;
+        }
+
         int[] firstHalf = getFirstHalfOf(array);
         int[] secondHalf = getSecondHalfOf(array);
 
