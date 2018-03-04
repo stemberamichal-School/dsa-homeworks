@@ -1,3 +1,17 @@
+/*
+ * Naimplementujte třídu Homework2 implementující rozhraní InterSearch (váš soubor Homework2.java bude toto rozhraní obsahovat).
+ */
+
+interface InterSearch {
+    /* Požitím interpolačního hledání vrátí index prvku what nalezeného mezi indexy first a last
+       pole data nebo -1, pokud tam není. Metoda bude rekurzivní a měla by být odolná vůči chybně
+       zadaným parametrům (v případě chyby vrátí opět -1). Pro zaokrouhlování na celá čísla použijte metodu Math.round(). */
+    public int search(int first, int last, int what, int[] data);
+}
+
+/*
+ * Naimplementujte třídu Homework2 implementující rozhraní InterSearch (váš soubor Homework2.java bude toto rozhraní obsahovat).
+ */
 
 public class Homework2 implements InterSearch {
     @Override
