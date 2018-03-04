@@ -19,7 +19,7 @@ public class Homework2 implements InterSearch {
         int indexRange = last - first;
 
         // Check invalid data
-        if (indexRange <= 0 || last >= data.length) {
+        if (first < 0 || indexRange <= 0 || last >= data.length) {
             return -1;
         }
 
