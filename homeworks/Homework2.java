@@ -5,19 +5,19 @@ public class Homework2 implements InterSearch {
         int indexRange = last - first;
 
         // Check invalid data
-        if (first > last || indexRange == 0 || last >= data.length) {
+        if (indexRange <= 0 || last >= data.length) {
             return -1;
         }
 
         // If only has one element return if it equals
-        if (indexRange == 1) {
-            if (what == data[first]) {
-                return first;
-            } else {
-                return -1;
-            }
+        if (what == data[first]) {
+            return first;
         }
 
+        // If less than 2 values
+        if (indexRange <= 1 || data[last] == data[first] ) {
+            return -1;
+        }
 
         int low = data[first];
         int high = data[last];
