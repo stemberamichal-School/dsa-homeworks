@@ -29,7 +29,7 @@ public class Homework2 implements InterSearch {
         }
 
         // If less than 2 values
-        if (indexRange <= 1 || data[first] == data[last] ) {
+        if (indexRange < 1 || data[first] == data[last] ) {
             return -1;
         }
 
