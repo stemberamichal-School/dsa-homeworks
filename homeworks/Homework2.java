@@ -29,14 +29,14 @@ public class Homework2 implements InterSearch {
         }
 
         // If less than 2 values
-        if (indexRange <= 1 || data[last] == data[first] ) {
+        if (indexRange <= 1 || data[first] == data[last] ) {
             return -1;
         }
 
         int low = data[first];
         int high = data[last];
         double valueRange = (double)(high - low);
-        double valuePosition = (what - low) / valueRange;
+        double valuePosition = Math.max(0, Math.min(1, (what - low) / valueRange));
         int index = first + (int)Math.round(valuePosition * indexRange);
 
         if (what == data[index]) {
