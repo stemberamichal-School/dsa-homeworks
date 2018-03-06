@@ -19,7 +19,7 @@ public class Homework2 implements InterSearch {
         int indexRange = last - first;
 
         // Check invalid data
-        if (first < 0 || indexRange <= 0 || last >= data.length) {
+        if (first < 0 || indexRange < 0 || last >= data.length) {
             return -1;
         }
 
@@ -37,7 +37,7 @@ public class Homework2 implements InterSearch {
         int high = data[last];
         double valueRange = (double)(high - low);
         double valuePosition = (what - low) / valueRange;
-        int index = (int)Math.round(valuePosition * indexRange);
+        int index = first + (int)Math.round(valuePosition * indexRange);
 
         if (what == data[index]) {
             return index;
