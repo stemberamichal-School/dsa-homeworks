@@ -76,6 +76,7 @@ class Heap<E extends DSAComparable<E>> {
 
     // Vytvori haldu nad danym HeapStorage (tzn. zavola algoritmus build heap).
     Heap(HeapStorage<E> storage) {
+        this.storage = storage;
         for (int i = storage.getSize() / 2; i > 0; --i) {
             heapify(i);
         }
@@ -138,7 +139,9 @@ class Heap<E extends DSAComparable<E>> {
     E extractMax() {
         storage.swap(1, storage.getSize());
         E max = storage.extractLast();
-        heapify(1);
+
+        if(exists(1)) heapify(1);
+
         return max;
     }
 
