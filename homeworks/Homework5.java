@@ -114,7 +114,7 @@ class Tree<E extends DSAComparable<E>> {
 
     Node<E> find(E elem) {
         Node<E> found = findInsert(root, elem);
-        if (found == null || !found.contents.equals(elem)) {
+        if (found == null || !found.contents.equal(elem)) {
             return null;
         }
         return found;
@@ -144,7 +144,7 @@ class Tree<E extends DSAComparable<E>> {
             }
         }
 
-        if (node == null || !elem.equals(node.contents)) {
+        if (node == null || !elem.equal(node.contents)) {
             return;
         }
 
