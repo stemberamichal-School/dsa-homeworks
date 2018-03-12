@@ -150,7 +150,7 @@ class Tree<E extends DSAComparable<E>> {
 
         Node<E> replace = null;
 
-        if (node.left == null) {
+        if (node.left != null) {
             replace = node.left;
             rightmost(node.left).right = node.right;
         } else if(node.right != null) {
@@ -163,6 +163,10 @@ class Tree<E extends DSAComparable<E>> {
             parent.right = replace;
         } else {
             root = replace;
+        }
+
+        if (replace != null) {
+            replace.setParent(parent);
         }
     }
 
