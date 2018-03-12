@@ -52,7 +52,7 @@ class Tree<E extends DSAComparable<E>> {
         if (root.right == null) {
             return root;
         }
-        return leftmost(root.right);
+        return rightmost(root.right);
     }
 
     private Node<E> findInsert(Node<E> root, E toInsert) {
