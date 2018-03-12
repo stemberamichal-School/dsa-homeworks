@@ -152,7 +152,9 @@ class Tree<E extends DSAComparable<E>> {
 
         if (node.left != null) {
             replace = node.left;
-            rightmost(node.left).right = node.right;
+            Node<E> rightm = rightmost(node.left);
+            rightm.right = node.right;
+            if(node.right != null) node.right.setParent(rightm);
         } else if(node.right != null) {
             replace = node.right;
         }
