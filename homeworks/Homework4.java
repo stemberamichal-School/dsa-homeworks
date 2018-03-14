@@ -1,12 +1,10 @@
 import com.sun.tools.classfile.Opcode;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
-import java.util.List;
+import java.util.stream.Stream;
+import static java.util.stream.Collectors.toList;
 
 class DSAHashTableIterator<K, V> implements Iterator<Pair<K, V>>{
 
@@ -15,10 +13,15 @@ class DSAHashTableIterator<K, V> implements Iterator<Pair<K, V>>{
 
     DSAHashTableIterator(Set<Pair<K, V>>[] table) {
         _index = 0;
-        _allPairs = Arrays.stream(table)
-                .map(x -> x.toArray())
-                .flatMap(x -> Arrays.stream(x))
-                .collect(Collectors.toList());
+//        _allPairs =
+        Stream<Pair<K, V>> pairStream = Arrays.stream(table)
+            .map( x -> {
+                    Pair<K, V>[] pairs = (Pair<K, V>[]) new Pair<?, ?>[x.size()];
+                    return x.toArray(pairs);
+            })
+            .flatMap(x -> Arrays.stream(x));
+
+        _allPairs = pairStream.collect(Collectors.toList());
     }
 
     @Override
@@ -48,17 +51,23 @@ class DSAHashTable<K,V> {
     DSAHashTable(int size) {
         count = 0;
         table = (Set<Pair<K, V> >[]) new Set<?>[size];
+
+        for (int i = 0; i < size; ++i) {
+            table[i] = new HashSet<>();
+        }
     }
 
     private Pair<K, V> pairWithKeyInSet(K key, Set<Pair<K, V>> set) {
         Pair<K, V> outputPair = null;
         int keyHash = key.hashCode();
+        Iterator<Pair<K, V>> it = set.iterator();
 
-        set.iterator().forEachRemaining(pair -> {
+        while(it.hasNext()) {
+            Pair<K, V> pair = it.next();
             if (pair.hashCode() == keyHash) {
                 outputPair = pair;
             }
-        });
+        }
 
         return outputPair;
     }
@@ -74,10 +83,12 @@ class DSAHashTable<K,V> {
 
         if(collision != null) {
             set.remove(collision);
+            count--;
         }
 
         Pair<K, V> insert = new Pair<>(key, value);
         set.add(insert);
+        count++;
     }
 
     // Vrati hodnotu asociovanou s danym klicem nebo null, pokud dany klic v tabulce neni.
@@ -123,17 +134,23 @@ class DSAHashTable<K,V> {
     // Zmeni delku vnitrniho pole, nainicializuje jej prazdnymi mnozinami a zkopiruje do nej vsechny dvojice.
 
     void resize(int newSize) {
+        DSAHashTableIterator<K, V> it = new DSAHashTableIterator<>(table);
+        count = 0;
+        table = (Set<Pair<K, V> >[]) new Set<?>[newSize];
 
-        /* kod */
+        for (int i = 0; i < newSize; ++i) {
+            table[i] = new HashSet<>();
+        }
 
+        while (it.hasNext()) {
+            Pair<K, V> current = it.next();
+            put(current.key, current.value);
+        }
     }
 
     // Vrati iterator pres vsechny dvojice v tabulce. Iterator nemusi mit implementovanou metodu remove.
 
     Iterator<Pair<K,V>> iterator() {
-
-        /* kod */
-
+        return new DSAHashTableIterator<>(table);
     }
-
 }
