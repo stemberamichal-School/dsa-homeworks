@@ -31,7 +31,9 @@ class DSAHashTableIterator<K, V> implements Iterator<Pair<K, V>>{
 
     @Override
     public Pair<K, V> next() {
-        return _allPairs.get(_index);
+        Pair<K, V> out = _allPairs.get(_index);
+        _index += 1;
+        return out;
     }
 
     @Override
