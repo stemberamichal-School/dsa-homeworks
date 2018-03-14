@@ -1,10 +1,6 @@
-import com.sun.tools.classfile.Opcode;
-
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import static java.util.stream.Collectors.toList;
 
 class DSAHashTableIterator<K, V> implements Iterator<Pair<K, V>>{
 
