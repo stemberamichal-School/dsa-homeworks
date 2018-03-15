@@ -91,6 +91,10 @@ class DSAHashTable<K,V> {
         Pair<K, V> insert = new Pair<>(key, value);
         set.add(insert);
         count++;
+
+        if(!isBigEnough()) {
+            resize(2 * table.length);
+        }
     }
 
     // Vrati hodnotu asociovanou s danym klicem nebo null, pokud dany klic v tabulce neni.
