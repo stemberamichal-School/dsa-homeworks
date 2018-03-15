@@ -57,13 +57,13 @@ class DSAHashTable<K,V> {
 
     private Pair<K, V> pairWithKeyInSet(K key, Set<Pair<K, V>> set) {
         Pair<K, V> outputPair = null;
-        int keyHash = key.hashCode();
         Iterator<Pair<K, V>> it = set.iterator();
 
         while(it.hasNext()) {
             Pair<K, V> pair = it.next();
-            if (pair.hashCode() == keyHash) {
+            if (pair.key.equals(key)) {
                 outputPair = pair;
+                break;
             }
         }
 
