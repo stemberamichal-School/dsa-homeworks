@@ -2,7 +2,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-class DSAHashTableIterator<K, V> implements Iterator<Pair<K, V>>{
+class DSAHashTableIterator<K, V> implements Iterator<Pair<K, V>> {
 
     private int _index;
     private List<Pair<K, V>> _allPairs;
@@ -120,6 +120,7 @@ class DSAHashTable<K,V> {
 
         if(collision != null) {
             set.remove(collision);
+            count -= 1;
         }
     }
 
@@ -138,7 +139,7 @@ class DSAHashTable<K,V> {
     // Pokud je pocet prvku mensi nebo roven dvojnasobku delky vnitrniho pole, vrati true, jinak vrati false.
 
     boolean isBigEnough() {
-        return 2 * table.length > count;
+        return 2 * table.length >= count;
     }
 
     // Zmeni delku vnitrniho pole, nainicializuje jej prazdnymi mnozinami a zkopiruje do nej vsechny dvojice.
