@@ -75,6 +75,10 @@ class DSAHashTable<K,V> {
     // vnitrni pole zdvojnasobi.
 
     void put(K key, V value) {
+        if (key == null || value == null) {
+            return;
+        }
+
         int index = getIndexOf(key);
         Set<Pair<K, V>> set = table[index];
         Pair<K, V> collision = pairWithKeyInSet(key, set);
@@ -92,6 +96,10 @@ class DSAHashTable<K,V> {
     // Vrati hodnotu asociovanou s danym klicem nebo null, pokud dany klic v tabulce neni.
 
     V get(K key) {
+        if (key == null) {
+            return null;
+        }
+
         int index = getIndexOf(key);
         Set<Pair<K, V>> set = table[index];
         Pair<K, V> pair = pairWithKeyInSet(key, set);
@@ -102,6 +110,10 @@ class DSAHashTable<K,V> {
     // Smaze dvojici s danym klicem. Pokud v tabulce dany klic neni, nedela nic.
 
     void remove(K key) {
+        if (key == null) {
+            return;
+        }
+
         int index = getIndexOf(key);
         Set<Pair<K, V>> set = table[index];
         Pair<K, V> collision = pairWithKeyInSet(key, set);
